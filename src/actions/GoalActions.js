@@ -3,7 +3,8 @@ import firebase from 'firebase';
 import {
   GOAL_UPDATE,
   GOAL_CREATE,
-  GOAL_FETCH_SUCCESS
+  GOAL_FETCH_SUCCESS,
+  GOAL_SAVE_SUCCESS
 } from './types';
 
 export const goalUpdate = ({ prop, value }) => {
@@ -13,12 +14,12 @@ export const goalUpdate = ({ prop, value }) => {
   };
 };
 
-export const goalCreate = ({ name, year, reason, description }) => {
+export const goalCreate = ({ name, year, reason, description, web }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`users/${currentUser.uid}/goals`)
-      .push({ name, year, reason, description })
+      .push({ name, year, reason, description, web })
       .then(() => {
         dispatch({ type: GOAL_CREATE });
         Actions.goalList({ type: 'reset' });
@@ -37,12 +38,25 @@ export const goalsFetch = () => {
   };
 };
 
-export const goalSave = ({ name, reason, year, description, uid }) => {
+export const goalSave = ({ name, reason, year, description, web, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`users/${currentUser.uid}/goals/${uid}`)
+      .set({ name, reason, year, description, web })
+      .then(() => {
+        dispatch({ type: GOAL_SAVE_SUCCESS })
+        Actions.goalList({ type: 'reset' });
+      });
+  };
+};
+
+export const goalDelete = ({ uid }) => {
   const { currentUser } = firebase.auth();
 
   return () => {
     firebase.database().ref(`users/${currentUser.uid}/goals/${uid}`)
-      .set({ name, reason, year, description })
+      .remove()
       .then(() => {
         Actions.goalList({ type: 'reset' });
       });

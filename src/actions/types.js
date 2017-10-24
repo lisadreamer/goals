@@ -6,3 +6,4 @@ export const LOGIN_USER = 'login_user';
 export const GOAL_UPDATE = 'goal_update';
 export const GOAL_CREATE = 'goal_create';
 export const GOAL_FETCH_SUCCESS = 'goal_fetch_success';
+export const GOAL_SAVE_SUCCESS = 'goal_save_success';

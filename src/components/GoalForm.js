@@ -16,46 +16,46 @@ class GoalForm extends Component {
             onChangeText={value => this.props.goalUpdate({ prop: 'name', value })}
           />
         </CardSection>
-        <CardSection style={{ flexDirection: 'column' }}>
-          <Text style={styles.pickerTextStyle}>Year</Text>
-          <Picker
-            selectedValue={this.props.year}
-            onValueChange={value => this.props.goalUpdate({ prop: 'year', value })}
-          >
-            <Picker.Item label="2017" value="2017" />
-            <Picker.Item label="2018" value="2018" />
-            <Picker.Item label="2019" value="2019" />
-            <Picker.Item label="2020" value="2020" />
-            <Picker.Item label="2027" value="2027" />
-            <Picker.Item label="2037" value="2037" />
-            <Picker.Item label="2047" value="2047" />
-            <Picker.Item label="2057" value="2057" />
-          </Picker>
-      </CardSection>
-      <CardSection>
-        <Input
-          label="Reason"
-          placeholder="Why?"
-          value={this.props.reason}
-          onChangeText={value => this.props.goalUpdate({ prop: 'reason', value })}
-        />
-      </CardSection>
-      <CardSection>
-        <Input
-          label="Steps"
-          placeholder="...concrete schedule"
-          value={this.props.description}
-          onChangeText={value => this.props.goalUpdate({ prop: 'description', value })}
-        />
-      </CardSection>
+        <CardSection>
+          <Input
+            label="Year"
+            placeholder="2017"
+            value={this.props.year}
+            onChangeText={value => this.props.goalUpdate({ prop: 'year', value })}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="Reason"
+            placeholder="Why?"
+            value={this.props.reason}
+            onChangeText={value => this.props.goalUpdate({ prop: 'reason', value })}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="Steps"
+            placeholder="...concrete schedule"
+            value={this.props.description}
+            onChangeText={value => this.props.goalUpdate({ prop: 'description', value })}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="Web"
+            placeholder="https://github.com"
+            value={this.props.web}
+            onChangeText={value => this.props.goalUpdate({ prop: 'web', value })}
+          />
+        </CardSection>
       </View>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { name, reason, year, description } = state.goalForm;
-  return { name, reason, year, description };
+  const { name, reason, year, description, web } = state.goalForm;
+  return { name, reason, year, description, web };
 };
 
 const styles = {
